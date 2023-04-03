@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update - User</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <style>
+    body {
+      background: rgb(99, 39, 120)
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #BA68C8
+    }
+
+    .profile-button {
+      background: rgb(99, 39, 120);
+      box-shadow: none;
+      border: none
+    }
+
+    .profile-button:hover {
+      background: #682773
+    }
+
+    .profile-button:focus {
+      background: #682773;
+      box-shadow: none
+    }
+
+    .profile-button:active {
+      background: #682773;
+      box-shadow: none
+    }
+
+    .back:hover {
+      color: #682773;
+      cursor: pointer
+    }
+
+    .labels {
+      font-size: 11px
+    }
+
+    .add-experience:hover {
+      background: #BA68C8;
+      color: #fff;
+      cursor: pointer;
+      border: solid 1px #BA68C8
+    }
+  </style>
+</head>
+<body>
+<form th:action="@{/api/user/update/{username}(username=${currentUser.username})}" th:object="${currentUser}" method="post" enctype="multipart/form-data">
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row" >
+<!--    <form th:action="@{/api/user/update/{username}(username=${currentUser.username})}" >-->
+
+<!--    <a th:text="${subject.getTitle()}" th:href="@{/{title}(title=${subject.getTitle()})}"></a>-->
+
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <table th:if="${currentUser.logoUrl == '' || currentUser.logoUrl == null}">
+            <img th:src="@{${ 'view/img/download.png'}}" width="50px" height="60px">
+<!--          Name-->
+          <span class="font-weight-bold"  th:text="${currentUser.name}"></span>
+<!--          Email-->
+        <span class="text-black-50" th:text="${currentUser.email}"></span>
+        <span> </span>
+
+        </table>
+
+        <table th:if="${ currentUser.getLogoUrl() != null}">
+
+            <p class="images">
+            <div class="images" th:if="${#strings.contains(currentUser.getLogoUrl(),'http')}">
+                <img class="rounded-circle mt-5" width="150px" th:src="@{${currentUser.logoUrl}}">
+            </div>
+            <div class="images" th:unless="${#strings.contains(currentUser.getLogoUrl(),'http')}">
+                <img class="rounded-circle mt-5" width="150px" th:src="@{${ 'view/img/' +currentUser.logoUrl}}">
+            </div>
+            </p>
+          <img class="rounded-circle mt-5" width="150px"
+
+               th:src="@{'/static/'+${currentUser.logoUrl}}">
+<!--          <img class="image" th:src="@{'/static/'+${currentUser.logoUrl}}" alt="Avatar">-->
+          <!--          Name-->
+<!--          <span class="font-weight-bold"  th:text="${currentUser.name}"></span>-->
+          <!--          Email-->
+<!--          <span class="text-black-50" th:text="${currentUser.email}"></span>-->
+          <span> </span>
+
+        </table>
+      </div>
+
+
+
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Update Profile Settings</h4>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6"><label class="labels">New Name</label>
+            <input type="text" class="form-control" placeholder="first name" required name="name"  th:value="${currentUser.name}"></div>
+          <div class="col-md-6"><label class="labels">New Surname</label>
+            <input type="text" th:value="${currentUser.username}" class="form-control"  required name="username"></div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12"><label class="labels">New Email</label>
+            <input type="email" class="form-control"   name="email"  th:value="${currentUser.email}">
+          </div>
+          <div class="col-md-12"><label class="labels">New Password</label>
+            <input type="password" class="form-control" placeholder="enter password"  name="password" ></div>
+          <div class="col-md-7"><label class="labels">New Image</label>
+            <input type="file" class="form-control" placeholder="image"  name="image"></div>
+<!--          <label class="control-label" >Image:</label>-->
+<!--          <input type="file" required name="image">-->
+        </div>
+<!--        <div class="row mt-3">-->
+<!--          <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>-->
+<!--          <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>-->
+<!--        </div>-->
+        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+      </div>
+    </div>
+<!--    <div class="col-md-4">-->
+<!--      <div class="p-3 py-5">-->
+<!--        <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>-->
+<!--        <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>-->
+<!--        <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+</div>
+</div>
+</div>
+</form>
+</body>
+</html>

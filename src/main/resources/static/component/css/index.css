@@ -1,0 +1,19 @@
+/**{*/
+/*    box-sizing: border-box;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+.index-to{
+    font-size: 30px;
+    background-color: red;
+}
+.login-param{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.images img{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}

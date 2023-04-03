@@ -1,0 +1,444 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+
+    <title>CodingBat Java</title></head>
+<link rel="stylesheet" type="text/css" th:href="@{component/css/index.css}" href="../static/component/css/index.css">
+<body>
+<a href="/"><span style='font-size:200%;'>CodingBat</span></a> code practice
+<div class="pretab"><p class="max">Welcome to Codingbat. See <a href="/help.html">
+    help</a> for the latest.</p>
+</div>
+<div th:class="login-param" class="login-param">
+
+    <table th:if="${isUser == 'not'}">
+        <form method="post" action="/login">
+            <tbody>
+            <tr>
+                <td>username</td>
+                <td><input type="text" name="username" size="20"></td>
+            </tr>
+            <tr>
+                <td>password</td>
+                <td><input type="password" name="password" size="20"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="login"></td>
+                <!--                <td> <a class="btn-google" href="/oauth2/authorization/google"> <img style="width: 25px; height: 25px" src="data:image/png;base64,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" > Sing up with Google</a>  </td>-->
+            </tr>
+
+        </form>
+        <tr>
+            <td colspan="2"><a href='/forget-password'>forget password</a> | <a href=/register>create account</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <table th:if="${isUser == 'yes' && user.getLogoUrl()!=null}" class="login-param">
+        <p class="images">
+
+        <div class="images" th:if="${#strings.contains(user.getLogoUrl(),'http')}">
+            <img th:src="@{${user.logoUrl}}">
+        </div>
+        <div class="images" th:unless="${#strings.contains(user.getLogoUrl(),'http')}">
+            <img th:src="@{${ 'view/img/' +user.logoUrl}}">
+        </div>
+        </p>
+<!--username joylashtir-->
+        <h4 th:text="${user.email}"></h4>
+<!--       -->
+    </table>
+    <div th:if="${isUser != 'yes'}">
+        <img th:src="@{${ 'view/img/download.png'}}" width="50px" height="60px">
+    </div>
+    <div th:if="${isUser == 'yes'}">
+        <a href="/logout">Log out</a> | <a href="/api/user/update">My Account</a>
+    </div>
+
+</div>
+<div class="tabc">
+    <!--    <h1 th:text="${isUser}"></h1>-->
+
+    <nav th:if="${ ADMIN == 'ADMIN'}">
+        <a style="text-decoration: none" href="/admin/lang"> Language crud</a>
+    </nav>
+    <nav th:if="${ ADMIN == 'SUPER_ADMIN'}">
+        <a style="text-decoration: none" href="/api/admin"> ADMIN CONTROLLER</a>
+    </nav>
+
+    <nav>
+        <tr th:each="subject: ${subjectList}">
+            <a th:text="${subject.getTitle()}" th:href="@{/{title}(title=${subject.getTitle()})}"></a>
+        </tr>
+
+
+    </nav>
+
+
+    <div class="alls">
+        <div th:each="topic: ${topicList}">
+
+            <div class="content-main">
+                <h4>
+                    <a th:text="${topic.getName()}"
+                       th:href="@{/{name}/{topic}(name=${lang}, topic=${topic.getName()})}"></a>
+                </h4>
+                <img
+                        src="https://codingbat.com/s1.jpg"><img src="https://codingbat.com/s1.jpg"><img
+                    src="https://codingbat.com/s1.jpg"><img
+                    src="https://codingbat.com/s1.jpg"><img
+                    src="https://codingbat.com/s1.jpg"><img src="https://codingbat.com/s1.jpg"><img
+                    src="https://codingbat.com/s1.jpg"><img
+                    src="https://codingbat.com/s1.jpg"><br>
+                <h4 th:text="${topic.getContent()}"></h4>
+                <br><img src="https://codingbat.com/c1.jpg"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+    .images {
+        right: 5px;
+        top: 10px;
+    }
+
+    .alls {
+        width: 1400px !important;
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .content-main {
+        width: 250px;
+
+        max-width: 300px;
+        padding: 10px;
+        border: 1px solid gray;
+        border-radius: 1em;
+    }
+
+    html, body {
+        font-size: small;
+        font-family: verdana, arial, helvetica, sans-serif;
+    }
+
+    /* MOBILE-CSS prevents crazy shrinking of font in table e.g. on section page */
+
+
+    /* someday maybe a bigger font */
+
+    /* font-size: 85% works ok too. Historically cb was verdana/small */
+    /* font-size: medium .. have tried */
+    /* TBD: wikipedia sets a custom line-height which seems to work nicely with small font */
+
+    /* cb: font-size: small; */
+    /* Small seems a bit over-small. Using a % seems to give a fraction of "medium". I think "small" is about 75% */
+    /* hacker: body  { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282; }*/
+
+    /* at one time, pre was coming out too small when body=small, but medium is huge, so now do nothing */
+    /* The show-solution button really hits this case. */
+    /* pre, code {font-size:medium; } */
+    /* It turns out the "monaco" font family looks pretty big at small, so we just leave it now */
+    /* could have  "medium" directive for the "doc" pages where it looks nicer */
+
+    /* this is the list from ace which seems fine */
+    pre, code {
+        font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro", monospace
+    }
+
+
+    /* Older p max-width directive, phase out */
+    p {
+        max-width: 800px;
+    }
+
+    /* main max width */
+    p.max {
+        max-width: 800px;
+    }
+
+    /* doc paragraph above code area, should agree with code area width roughly */
+    p.max2 {
+        max-width: 600px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    /* ..EE is web default, we go a bit darker */
+    :link {
+        color: #0000DD;
+    }
+
+    /* web default #551A8B */
+    :visited {
+        color: #551A8B;
+    }
+
+
+    /* These are used on Challenge page */
+    .coding {
+        border: 2px solid gray;
+        font-family: monospace;
+        font-size: medium
+    }
+
+    .lefty {
+        float: left;
+        padding-right: 40px;
+    }
+
+    /* left div with ta-code */
+    .righty {
+        float: left;
+    }
+
+    /* right output div */
+    .parenty:after { /* Imaginary class name */
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* These are more normal names, tied to div */
+
+
+    /* div class to reset the floats to normal */
+
+
+    /* The little box that summarizes a section. Margin is box vs. outside, padding is within the box */
+
+
+    /* used to indent the Challenge content similarly to div.summ */
+
+
+    /* padding:5px; */
+
+
+    /* generally what we want */
+    td {
+        vertical-align: top;
+    }
+
+    /* These used to define w 'h1,' h2 h3, but still have the .h1 .h2 versions. class=h2 is our go-to big font for section titles etc. */
+    .h1 {
+        font-size: 300%;
+    }
+
+    .h2 {
+        font-size: 166%;
+    }
+
+    .h3 {
+        font-size: 120%;
+    }
+
+
+    /* used in output for red coloring of fail results */
+    span.no {
+        color: red
+    }
+
+    td.no {
+        min-width: 22px;
+        background-color: red;
+    }
+
+    td.ok {
+        min-width: 22px;
+        background-color: green;
+    }
+
+    /* code snippet with explanation to its right on API pages*/
+    code.spaceright {
+        margin-right: 12px;
+    }
+
+    /* text snippet to indent a little */
+    p.indent {
+        margin-left: 25px;
+    }
+
+    /* main go button. Used to lightgray, a windows 95 look! */
+    button.go {
+        width: 200px;
+        height: 30px;
+        background-color: #f1f1f1;
+        font-size: 112%;
+        font-weight: bold;
+        border-radius: 6px;
+    }
+
+
+    /* make the color here the same so fits in */
+    button.gray {
+        background-color: #f1f1f1;
+        border-radius: 6px;
+    }
+
+    button.go {
+        font-weight: bold;
+        border-radius: 8px; /* all current browsers */
+        background: #bbb;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #777;
+        color: #333;
+        text-align: center;
+        text-shadow: 1px 1px 0 #d8d8d8;
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+
+
+        width: 200px;
+        height: 35px;
+        font-size: 125%;
+    }
+
+    button.go:hover {
+        background-color: #aaa;
+        color: #111;
+        border-color: #444;
+
+        transition-duration: 0.1s; /* looks a little better */
+    }
+
+    button.go:active {
+        background: #484848;
+    }
+
+
+    /* played around with the plain buttons for some sort of hover, but left it stock */
+    button.plain {
+        /*
+         border-radius: 6px;
+         font-weight: bold;
+         */
+    }
+
+    button.plain:hover {
+        /*
+        background-color: #f2f2f2;
+        border-radius: 6px;
+        */
+    }
+
+    /* border: solid 1px #203E5F; */
+
+    /*
+        background-image: -moz-linear-gradient(top,rgba(255,255,255,0.8),rgba(255,255,255,0.2));
+        background-image: -webkit-gradient(linear,center top,center bottom,from(rgba(255,255,255,0.8)),to(rgba(255,255,255,0.2)));
+        background-image: linear-gradient(to bottom,rgba(255,255,255,0.8),rgba(255,255,255,0.2));
+    */
+
+    /*
+    // for author page, this may be necessary to make the disabled have the same light gray across browsers
+    // works when the disabled attr is present (with any value)
+    textarea[disabled]{background-color: #F8F8F8; }
+    */
+
+    /*
+    From challenge page
+    textarea name=code rows=24 cols=80 style='border: 2px solid gray; font-family: monospace;' spellcheck=false onKeyPress='return handleCR(\"codeform\",event)'>
+    */
+
+
+    /* challenge docs in here, so UI does not jump around too much for short docs. */
+
+
+    /* div of text above the tabs. Min-height here so the key muscle-memory bits don't jump around too much.
+    26px here works with a line of text */
+
+
+    /* container around tab, forcing it below login widget. clear:both is required */
+
+
+    /* nav/tab stuff here */
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* TRBL ! */
+    nav li {
+        display: inline;
+        border: solid;
+        border-width: 1px 1px 0 1px;
+        margin: 0 25px 0 6px; /* space between the two tabs */
+    }
+
+    nav li a {
+        padding: 0 40px; /* horiz space around the blue link */
+    }
+
+    /*
+    #nav li {
+        float: left;
+        border: 1px solid;
+        border-bottom-width: 0;
+        margin: 0 5px 0 0;
+    }
+    */
+
+
+    #content {
+        border-top: 1px solid;
+        clear: both;
+    }
+
+    #selected {
+        position: relative;
+        top: 1px;
+        background: white;
+    }
+
+    /* end nav/li */
+
+
+    /* ace support */
+    /* their demo, which is awful
+    #editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    */
+
+    /* discarded: margin: auto; display: block; border: 1px solid #888; */
+    #ace_div {
+        width: 600px;
+        height: 375px;
+        border: 2px solid gray;
+    }
+
+
+    /* output table */
+
+    table.out {
+        border-collapse: collapse; /* vs. sep border per cell */
+    }
+
+    table.out td { /* , th */
+        border: 2px solid black;
+        padding: 4px;
+    }
+
+
+    /* as above, but over on the pref page */
+    table.clean {
+        border-collapse: collapse; /* vs. sep border per cell */
+    }
+
+    td.clean {
+        border: 1px solid black;
+        padding: 6px;
+    }
+
+
+</style>
+</body>
